@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "id": "id_1",
+      "name": "Plastic",
+      "category": "RECYCLABLE",
+      "points": 50,
+      "image_url": "https://media.istockphoto.com/id/1328523682/vector/crushed-plastic-bottle.jpg?s=612x612&w=0&k=20&c=QFnG19RO05TFYrYT9AVcm6akbdKor3JujbgeJz2H-64="
+    },
+    {
+      "id": "id_2",
+      "name": "Paper",
+      "category": "RECYCLABLE",
+      "points": 50,
+      "image_url": "https://w7.pngwing.com/pngs/102/1007/png-transparent-cardboard-box-computer-icons-psd-box-miscellaneous-cardboard-box-icon.png"
+    },
+    {
+      "id": "id_3",
+      "name": "Glass",
+      "category": "RECYCLABLE",
+      "points": 50,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/5386/5386124.png"
+    },
+    {
+      "id": "id_4",
+      "name": "Metal",
+      "category": "RECYCLABLE",
+      "points": 50,
+      "image_url": "https://www.nicepng.com/png/detail/56-561453_this-free-icons-png-design-of-soda-can.png"
+    },
+    {
+      "id": "id_5",
+      "name": "Electronic waste",
+      "category": "RECYCLABLE",
+      "points": 50,
+      "image_url": "https://img.freepik.com/premium-vector/cartoon-retro-color-noise-tv-icon-broken-television-with-bent-antenna-isolated-white-background_168129-1388.jpg"
+    },
+    {
+      "id": "id_6",
+      "name": "Food waste",
+      "category": "NON_RECYCLABLE",
+      "points": 100,
+      "image_url": "https://png.pngtree.com/png-vector/20200325/ourmid/pngtree-throwing-garbage-of-food-waste-in-trash-can-png-image_2164742.jpg"
+    },
+    {
+      "id": "id_7",
+      "name": "Styrofoam",
+      "category": "NON_RECYCLABLE",
+      "points": 100,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/5163/5163566.png"
+    },
+    {
+      "id": "id_8",
+      "name": "Soiled paper",
+      "category": "NON_RECYCLABLE",
+      "points": 100,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/843/843910.png"
+    },
+    {
+      "id": "id_9",
+      "name": "Broken glass",
+      "category": "NON_RECYCLABLE",
+      "points": 100,
+      "image_url": "https://img.freepik.com/free-vector/broken-frosted-glass-realistic-icon_1284-12125.jpg?w=2000"
+    },
+    {
+      "id": "id_10",
+      "name": "Ceramics",
+      "category": "NON_RECYCLABLE",
+      "points": 100,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/6157/6157726.png"
+    },
+    {
+      "id": "id_11",
+      "name": "Batteries",
+      "category": "HAZARDOUS",
+      "points": 200,
+      "image_url": "https://toppng.com/uploads/preview/charging-battery-icon-flat-battery-icon-11563051103fb9hqfatdg.png"
+    },
+    {
+      "id": "id_12",
+      "name": "Paints and solvents",
+      "category": "HAZARDOUS",
+      "points": 200,
+      "image_url": "https://image.pngaaa.com/581/5248581-middle.png"
+    },
+    {
+      "id": "id_13",
+      "name": "Electronics",
+      "category": "HAZARDOUS",
+      "points": 200,
+      "image_url": "https://icons.veryicon.com/png/o/construction-tools/engineering-physics-color-icon/electronics.png"
+    },
+    {
+      "id": "id_14",
+      "name": "Medical waste",
+      "category": "HAZARDOUS",
+      "points": 200,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/2911/2911702.png"
+    },
+    {
+      "id": "id_15",
+      "name": "Chemicals",
+      "category": "HAZARDOUS",
+      "points": 200,
+      "image_url": "https://cdn-icons-png.flaticon.com/512/1486/1486187.png"
+    }
+  ]
+}
