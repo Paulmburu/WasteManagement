@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WasteManagement</string>
+    <string name="no_data_image_view">no data image view</string>
+</resources>
