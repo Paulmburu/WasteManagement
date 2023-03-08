@@ -5,28 +5,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import github.paulmburu.wastemanagement.databinding.ItemWasteTypeBinding
+import github.paulmburu.wastemanagement.databinding.ItemProgressBinding
 import github.paulmburu.wastemanagement.models.WasteTypePresentation
 
-class WasteTypeRecyclerAdapter(val clickListener: OnClickListener) :
-    ListAdapter<WasteTypePresentation, WasteTypeRecyclerAdapter.WasteTypeViewHolder>(
-        WasteTypeComparator()
+
+class ProgressAdapter :
+    ListAdapter<WasteTypePresentation, ProgressAdapter.ProgressViewHolder>(
+        ProgressComparator()
     ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WasteTypeViewHolder {
-        return WasteTypeViewHolder.create(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgressViewHolder {
+        return ProgressViewHolder.create(parent)
     }
 
-    override fun onBindViewHolder(holder: WasteTypeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProgressViewHolder, position: Int) {
         val wasteType = getItem(position)
-        holder.itemView.setOnClickListener {
-            clickListener.onClick(wasteType)
-        }
         holder.bind(wasteType)
     }
 
 
-    class WasteTypeViewHolder(private val binding: ItemWasteTypeBinding) :
+    class ProgressViewHolder(private val binding: ItemProgressBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(
             wasteTypePresentation: WasteTypePresentation,
@@ -38,16 +36,16 @@ class WasteTypeRecyclerAdapter(val clickListener: OnClickListener) :
         }
 
         companion object {
-            fun create(parent: ViewGroup): WasteTypeViewHolder {
+            fun create(parent: ViewGroup): ProgressViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemWasteTypeBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemProgressBinding.inflate(layoutInflater, parent, false)
 
-                return WasteTypeViewHolder(binding)
+                return ProgressViewHolder(binding)
             }
         }
     }
 
-    class WasteTypeComparator : DiffUtil.ItemCallback<WasteTypePresentation>() {
+    class ProgressComparator : DiffUtil.ItemCallback<WasteTypePresentation>() {
         override fun areItemsTheSame(
             oldItem: WasteTypePresentation,
             newItem: WasteTypePresentation
@@ -62,8 +60,4 @@ class WasteTypeRecyclerAdapter(val clickListener: OnClickListener) :
             return oldItem.id == newItem.id
         }
     }
-}
-
-class OnClickListener(val clickListener: (wasteTypePresentation: WasteTypePresentation) -> Unit) {
-    fun onClick(wasteTypePresentation: WasteTypePresentation) = clickListener(wasteTypePresentation)
 }

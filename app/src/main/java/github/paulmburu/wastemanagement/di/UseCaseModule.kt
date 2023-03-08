@@ -25,4 +25,14 @@ object UseCaseModule {
         return InsertWasteTypesUseCase(wasteManagementRepository)
     }
 
+    @Provides
+    fun providesInsertProgressUseCase(wasteManagementRepository: WasteManagementRepository): InsertProgressUseCase {
+        return InsertProgressUseCase(wasteManagementRepository)
+    }
+
+    @Provides
+    fun providesGetProgressUseCase(wasteManagementRepository: WasteManagementRepository): GetProgressUseCase {
+        return GetProgressUseCase(wasteManagementRepository)
+    }
+
 }

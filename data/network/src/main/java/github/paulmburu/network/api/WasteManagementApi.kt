@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface WasteManagementApi {
 
-    @POST("v3/90651c79-10ec-4494-aab4-2b8ea85dcc2d")
+    @POST("v3/fa130804-0002-4018-9975-07f15cb651a9")
     @Headers("Accept:application/json")
     suspend fun fetchWasteTypes(
     ): Response<WasteTypeResponse>

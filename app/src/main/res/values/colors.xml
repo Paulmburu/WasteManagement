@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    
+
     <color name="bali_hai">#859FAF</color>
+    <color name="dodger_blue">#2196F3</color>
+    <color name="curious_blue">#1E88E5</color>
+    <color name="shakespeare">#64B7D1</color>
 </resources>
