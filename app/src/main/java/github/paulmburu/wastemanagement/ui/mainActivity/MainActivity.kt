@@ -2,8 +2,6 @@ package github.paulmburu.wastemanagement.ui.mainActivity
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -17,6 +15,7 @@ import github.paulmburu.wastemanagement.databinding.ActivityMainBinding
 import github.paulmburu.wastemanagement.mappers.toDomain
 import github.paulmburu.wastemanagement.models.WasteTypePresentation
 import github.paulmburu.wastemanagement.ui.adapters.OnClickListener
+import github.paulmburu.wastemanagement.ui.adapters.ProgressAdapter
 import github.paulmburu.wastemanagement.ui.adapters.TipsAdapter
 import github.paulmburu.wastemanagement.ui.adapters.WasteTypeRecyclerAdapter
 import github.paulmburu.wastemanagement.util.RecyclingTips
@@ -29,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetLayout: View
     private lateinit var sheetBehavior: BottomSheetBehavior<View>
     private lateinit var buttonConfirm: MaterialButton
+    private lateinit var progressAdapter: ProgressAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -71,15 +71,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.progressResult.observe(this) { uiState ->
             when (uiState) {
                 is MainViewModel.FetchProgressUiState.Loading -> {
-//                    displayLoadingState()
                 }
                 is MainViewModel.FetchProgressUiState.Failure -> {
-//                    displayFailedState()
                 }
 
                 is MainViewModel.FetchProgressUiState.Success -> {
-//                    displayWasteTypesState(uiState.data)
-                    println(uiState.data)
+                    displayProgressData(uiState.data)
                 }
 
                 is MainViewModel.FetchProgressUiState.Empty -> {
@@ -97,18 +94,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun displayProgressData(data: List<WasteTypePresentation>){
+        if(data.isNullOrEmpty()){
+            binding.recycledProgressView.visibility = View.GONE
+        }else {
+            binding.recycledProgressView.visibility = View.VISIBLE
+            val progressAdapter = ProgressAdapter()
+            binding.progressRecyclerView.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                adapter = progressAdapter
+            }
+
+            binding.countTextView.text = "${data.size} / 100 Items"
+            binding.recycledProgressBar.progress = data.size
+            progressAdapter.submitList(data)
+        }
+    }
+
+
     private fun displayWasteTypesState(wasteTypes: List<WasteTypePresentation>) {
 
         val wasteManagementAdapter = WasteTypeRecyclerAdapter(
             OnClickListener { wasteTypePresentation ->
                 if (sheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 } else {
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
                 }
 
                 buttonConfirm.setOnClickListener {
                     viewModel.insertProgress(wasteTypePresentation.toDomain())
+                    if (sheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) sheetBehavior.state =
+                        BottomSheetBehavior.STATE_COLLAPSED
                 }
             }
         )
@@ -142,12 +159,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclingTips(){
-        bottomSheetLayout  = binding.bottomSheet
+    private fun setupRecyclingTips() {
+        bottomSheetLayout = binding.bottomSheet
         sheetBehavior = BottomSheetBehavior.from(bottomSheetLayout)
 
         val tipsRecyclerView = bottomSheetLayout.findViewById<RecyclerView>(R.id.tipsRecyclerView)
-         buttonConfirm = bottomSheetLayout.findViewById<MaterialButton>(R.id.buttonConfirm)
+        buttonConfirm = bottomSheetLayout.findViewById<MaterialButton>(R.id.buttonConfirm)
 
 
         val tipsAdapter = TipsAdapter()

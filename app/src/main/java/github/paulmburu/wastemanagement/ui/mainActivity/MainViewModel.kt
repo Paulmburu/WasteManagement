@@ -42,6 +42,7 @@ class MainViewModel @Inject constructor(
 
     init {
         mutableConnectivityStatus.value = connectivityProvider.isNetworkAvailable()
+        getProgress()
     }
 
     fun loadNetworkData() = viewModelScope.launch {
@@ -104,34 +105,37 @@ class MainViewModel @Inject constructor(
         }
     }
 
-     fun insertProgress(wasteType: WasteType) {
+    fun insertProgress(wasteType: WasteType) {
         viewModelScope.launch {
             insertProgressUseCase(wasteType)
+            getProgress()
         }
     }
 
-     suspend fun getProgress() {
-        getProgressUseCase(Unit).onStart {
-            mutableProgressResult.value = FetchProgressUiState.Loading
-        }.collect { resource ->
-            when (resource) {
-                is Resource.Success -> {
-                    if (resource.data == null) {
-                        mutableProgressResult.value = FetchProgressUiState.Empty
-                    } else {
-                        mutableProgressResult.value = FetchProgressUiState.Success(
-                            data = resource.data!!.map { it.toPresentation() }
+    fun getProgress() {
+        viewModelScope.launch {
+            getProgressUseCase(Unit).onStart {
+                mutableProgressResult.value = FetchProgressUiState.Loading
+            }.collect { resource ->
+                when (resource) {
+                    is Resource.Success -> {
+                        if (resource.data == null) {
+                            mutableProgressResult.value = FetchProgressUiState.Empty
+                        } else {
+                            mutableProgressResult.value = FetchProgressUiState.Success(
+                                data = resource.data!!.map { it.toPresentation() }
+                            )
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        mutableProgressResult.value = FetchProgressUiState.Failure(
+                            message = resource.message.toString()
                         )
                     }
                 }
 
-                is Resource.Error -> {
-                    mutableProgressResult.value = FetchProgressUiState.Failure(
-                        message = resource.message.toString()
-                    )
-                }
             }
-
         }
     }
 

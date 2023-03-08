@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import github.paulmburu.domain.repository.WasteManagementRepository
+import github.paulmburu.local.dao.ProgressDao
 import github.paulmburu.local.dao.WasteManagementDao
 import github.paulmburu.network.api.WasteManagementApi
 import github.paulmburu.repository.repository.WasteManagementRepositoryImpl
@@ -17,7 +18,8 @@ object RepositoryModule {
     fun providesWasteManagementRepository(
         wasteManagementApi: WasteManagementApi,
         wasteManagementDao: WasteManagementDao,
+        progressDao: ProgressDao
     ): WasteManagementRepository {
-        return WasteManagementRepositoryImpl(wasteManagementApi, wasteManagementDao)
+        return WasteManagementRepositoryImpl(wasteManagementApi, wasteManagementDao, progressDao)
     }
 }

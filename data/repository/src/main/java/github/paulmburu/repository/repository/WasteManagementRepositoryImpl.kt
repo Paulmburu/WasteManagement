@@ -3,6 +3,7 @@ package github.paulmburu.repository.repository
 import github.paulmburu.common.Resource
 import github.paulmburu.domain.models.WasteType
 import github.paulmburu.domain.repository.WasteManagementRepository
+import github.paulmburu.local.dao.ProgressDao
 import github.paulmburu.local.dao.WasteManagementDao
 import github.paulmburu.local.mappers.toDomain
 import github.paulmburu.local.mappers.toLocal
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 class WasteManagementRepositoryImpl @Inject constructor(
     private val wasteManagementApi: WasteManagementApi,
-    private val wasteManagementDao: WasteManagementDao
+    private val wasteManagementDao: WasteManagementDao,
+    private val progressDao: ProgressDao
 ) : WasteManagementRepository {
 
     override fun fetchWasteTypes(): Flow<Resource<List<WasteType>>> = flow {
@@ -68,12 +70,12 @@ class WasteManagementRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertProgressData(wasteType: WasteType) {
-        wasteManagementDao.insertProgress(wasteType.toProgressEntity())
+        progressDao.insertProgress(wasteType.toProgressEntity())
     }
 
     override fun getProgressData(): Flow<Resource<List<WasteType>>> = flow {
         try {
-            wasteManagementDao.getProgress().collect {
+            progressDao.getProgress().collect {
                 val data = it.map { wasteTypeEntity -> wasteTypeEntity.toDomain() }
                 emit(
                     Resource.Success(

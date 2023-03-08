@@ -81,7 +81,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Progress"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/wasteTypeRecyclerView" />
 
@@ -114,7 +114,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/countTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -135,19 +135,19 @@
                         android:scrollbarSize="10dp"
                         app:layout_constraintEnd_toStartOf="@+id/imageView"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/textView6"
-                        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                        app:layout_constraintStart_toStartOf="@+id/countTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/countTextView" />
 
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginEnd="8dp"
+                        android:src="@drawable/happy_sun_bro"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.23000002"
-                        tools:srcCompat="@tools:sample/avatars" />
+                        app:layout_constraintVertical_bias="0.23000002" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
@@ -156,7 +156,7 @@
                 android:id="@+id/recycledProgressView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="progressTextView,progressCard" />
+                app:constraint_referenced_ids="progressTextView,progressCard,itemsTextView, progressRecyclerView" />
 
             <TextView
                 android:id="@+id/itemsTextView"
@@ -165,18 +165,19 @@
                 android:layout_marginTop="16dp"
                 android:text="Items"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/progressCard"
                 app:layout_constraintTop_toBottomOf="@+id/progressCard" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recordRecyclerView"
+                android:id="@+id/progressRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:paddingBottom="100dp"
                 tools:itemCount="10"
-                tools:listitem="@layout/item_record"
+                tools:listitem="@layout/item_progress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/itemsTextView"
                 app:layout_constraintTop_toBottomOf="@+id/itemsTextView" />
