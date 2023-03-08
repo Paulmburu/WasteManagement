@@ -6,6 +6,7 @@ import github.paulmburu.domain.repository.WasteManagementRepository
 import github.paulmburu.local.dao.WasteManagementDao
 import github.paulmburu.local.mappers.toDomain
 import github.paulmburu.local.mappers.toLocal
+import github.paulmburu.local.mappers.toProgressEntity
 import github.paulmburu.network.api.WasteManagementApi
 import github.paulmburu.network.mappers.toDomain
 import kotlinx.coroutines.flow.Flow
@@ -65,4 +66,28 @@ class WasteManagementRepositoryImpl @Inject constructor(
             Timber.e(e)
         }
     }
+
+    override suspend fun insertProgressData(wasteType: WasteType) {
+        wasteManagementDao.insertProgress(wasteType.toProgressEntity())
+    }
+
+    override fun getProgressData(): Flow<Resource<List<WasteType>>> = flow {
+        try {
+            wasteManagementDao.getProgress().collect {
+                val data = it.map { wasteTypeEntity -> wasteTypeEntity.toDomain() }
+                emit(
+                    Resource.Success(
+                        data
+                    )
+                )
+            }
+        } catch (e: IOException) {
+            emit(Resource.Error(message = e.localizedMessage))
+            Timber.e(e)
+        } catch (e: Exception) {
+            Timber.e(e)
+        }
+    }
+
+
 }

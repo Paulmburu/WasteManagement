@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import github.paulmburu.wastemanagement.databinding.ItemWasteTypeBinding
 import github.paulmburu.wastemanagement.models.WasteTypePresentation
 
-class WasteTypeRecyclerAdapter :
+class WasteTypeRecyclerAdapter(val clickListener: OnClickListener) :
     ListAdapter<WasteTypePresentation, WasteTypeRecyclerAdapter.WasteTypeViewHolder>(
         WasteTypeComparator()
     ) {
@@ -19,6 +19,9 @@ class WasteTypeRecyclerAdapter :
 
     override fun onBindViewHolder(holder: WasteTypeViewHolder, position: Int) {
         val wasteType = getItem(position)
+        holder.itemView.setOnClickListener {
+            clickListener.onClick(wasteType)
+        }
         holder.bind(wasteType)
     }
 
@@ -59,4 +62,8 @@ class WasteTypeRecyclerAdapter :
             return oldItem.id == newItem.id
         }
     }
+}
+
+class OnClickListener(val clickListener: (wasteTypePresentation: WasteTypePresentation) -> Unit) {
+    fun onClick(wasteTypePresentation: WasteTypePresentation) = clickListener(wasteTypePresentation)
 }

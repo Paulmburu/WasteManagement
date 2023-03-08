@@ -11,5 +11,10 @@ interface WasteManagementRepository {
 
     fun getWasteTypes(): Flow<Resource<List<WasteType>>>
 
+    suspend fun insertProgressData(wasteTypes: WasteType)
+
+    fun getProgressData(): Flow<Resource<List<WasteType>>>
+
+
 }
 
