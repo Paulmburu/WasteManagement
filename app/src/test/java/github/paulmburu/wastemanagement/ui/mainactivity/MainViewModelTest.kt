@@ -30,6 +30,12 @@ class MainViewModelTest {
     private lateinit var getWasteTypesUseCase: GetWasteTypesUseCase
 
     @RelaxedMockK
+    private lateinit var insertProgressUseCase: InsertProgressUseCase
+
+    @RelaxedMockK
+    private lateinit var getProgressUseCase: GetProgressUseCase
+
+    @RelaxedMockK
     private lateinit var connectivityProvider: ConnectivityProvider
 
     private lateinit var viewModel : MainViewModel
@@ -40,6 +46,8 @@ class MainViewModelTest {
         viewModel = MainViewModel(
             fetchWasteTypesUseCase,
             getWasteTypesUseCase,
+            insertProgressUseCase,
+            getProgressUseCase,
             connectivityProvider
         )
     }
