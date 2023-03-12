@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 
 class WasteManagementRepositoryFake : WasteManagementRepository {
-    private val wasteTypesDatabase  = LinkedHashMap<String, WasteType>()
+    private val wasteTypesDatabase = LinkedHashMap<String, WasteType>()
+    private val progressDatabase = LinkedHashMap<String, WasteType>()
 
     override fun fetchWasteTypes(
     ): Flow<Resource<List<WasteType>>> = flow {
@@ -23,6 +24,14 @@ class WasteManagementRepositoryFake : WasteManagementRepository {
     }
 
     override fun getWasteTypes(): Flow<Resource<List<WasteType>>> {
+        return flowOf(Resource.Success(listOf()))
+    }
+
+    override suspend fun insertProgressData(wasteType: WasteType) {
+        progressDatabase[wasteType.id] = wasteType
+    }
+
+    override fun getProgressData(): Flow<Resource<List<WasteType>>> {
         return flowOf(Resource.Success(listOf()))
     }
 
